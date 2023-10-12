@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore'; // Import the necessary Firebase Firestore functions
+import { getStorage, ref } from "firebase/storage";
+
 
 const Plants = ({ firebaseApp }) => {
     const [plants, setPlants] = useState([]);
+    const storage = getStorage();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +37,8 @@ const Plants = ({ firebaseApp }) => {
                                 <div key={index}>{animal}</div>
                             ))}
                         </div>
+                        <img src={plant.imageUrl} alt="" />
+                        {console.log(plant.imageUrl)}
                     </div>
                 ))}
             </div>
