@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,4 +21,21 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export { auth };
+// Get url from ref
+async function getUrl(path) {
+    const storage = getStorage();
+    const storageRef = ref(storage, path);
+
+    try {
+        const url = await getDownloadURL(storageRef);
+        return url;
+        // You can use it to display the image on your website.
+    } catch (error) {
+        // Handle errors here
+        console.error(error);
+    }
+}
+
+
+
+export { auth, getUrl };

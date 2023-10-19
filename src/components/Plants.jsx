@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore'; // Import the necessary Firebase Firestore functions
-import { getStorage, ref } from "firebase/storage";
-
+import { getUrl } from '../firebase';
 
 const Plants = ({ firebaseApp }) => {
     const [plants, setPlants] = useState([]);
-    const storage = getStorage();
+    const [plantUrls, setPlantUrls] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,11 +24,26 @@ const Plants = ({ firebaseApp }) => {
         fetchData();
     }, [firebaseApp]);
 
+    useEffect(() => {
+        // Once plants data are available, get plants urls
+        const getImgUrls = async () => {
+            const imgUrls = [];
+            for (const plant of plants) {
+                const url = await getUrl(plant.imageUrl);
+                imgUrls.push(url);
+            }
+            setPlantUrls(imgUrls);
+        };
+
+        getImgUrls();
+    }, [plants]);
+    
     return (
         <div>
             <h2>My Plants:</h2>
-            <div>
-                {plants.map((plant) => (
+            {
+                <div>
+                {plants.map((plant, index) => (
                     <div key={plant.name}>
                         {plant.name}
                         <div>
@@ -37,11 +51,12 @@ const Plants = ({ firebaseApp }) => {
                                 <div key={index}>{animal}</div>
                             ))}
                         </div>
-                        <img src={plant.imageUrl} alt="" />
-                        {console.log(plant.imageUrl)}
+                        <img className="plant-image" src={plantUrls[index]} alt=''  />
                     </div>
                 ))}
             </div>
+            }
+            
         </div>
     );
 };
