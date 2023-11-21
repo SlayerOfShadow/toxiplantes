@@ -5,6 +5,7 @@ import { getUrl } from '../firebase';
 const Plants = ({ firebaseApp }) => {
     const [plants, setPlants] = useState([]);
     const [plantUrls, setPlantUrls] = useState([]);
+    const [animalNames, setAnimalNames] = useState([[]]);
 
     const fetchData = async () => {
         const db = getFirestore(firebaseApp); // Get Firestore instance from firebaseApp
@@ -20,7 +21,7 @@ const Plants = ({ firebaseApp }) => {
         setPlants(plantsData); // Update the state with the fetched plants
     };
 
-    async function getAnimal(ref) {
+    const getAnimal = async (ref) => {
         try {
             const snapshot = await getDoc(ref);
             if (snapshot.exists) {
@@ -50,29 +51,43 @@ const Plants = ({ firebaseApp }) => {
         setPlantUrls(imgUrls);
     };
 
+    const fetchAnimalNames = async () => {
+        const names = await Promise.all(
+            plants.map(async (plant) => {
+                const animalNamesForPlant = await Promise.all(
+                    plant.animals.map(async (animalRef) => await getAnimal(animalRef))
+                );
+                return animalNamesForPlant;
+            })
+        );
+        setAnimalNames(names);
+    };
+
     useEffect(() => {
         getImgUrls();
+        fetchAnimalNames();
     }, [plants]);
     
     return (
         <div className="plants">
             <h2>My Plants:</h2>
-            {
-                <div className="all-plants">
+            <div className="all-plants">
                 {plants.map((plant, index) => (
                     <div className="plant-name" key={plant.name}>
                         {plant.name}
                         <div className="plant-animals">
-                            {plant.animals.map((animal, index) => (
-                                console.log(getAnimal(animal))
-                            ))}
+                            {animalNames[index] && (
+                                <ul>
+                                    {animalNames[index].map((animal, animalIndex) => (
+                                        <li key={animalIndex}>{animal}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
-                        <img className="plant-image" src={plantUrls[index]} alt=''  />
+                        <img className="plant-image" src={plantUrls[index]} alt='' />
                     </div>
                 ))}
             </div>
-            }
-            
         </div>
     );
 };
