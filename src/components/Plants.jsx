@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs, getDoc } from 'firebase/firestore'; // Import the necessary Firebase Firestore functions
-import { getUrl, getAnimal } from '../firebase';
+import { getUrl } from '../firebase';
 
 const Plants = ({ firebaseApp }) => {
     const [plants, setPlants] = useState([]);
     const [plantUrls, setPlantUrls] = useState([]);
-    const [animals, setAnimals] = useState(null);
 
     const fetchData = async () => {
         const db = getFirestore(firebaseApp); // Get Firestore instance from firebaseApp
@@ -19,22 +18,6 @@ const Plants = ({ firebaseApp }) => {
         }));
 
         setPlants(plantsData); // Update the state with the fetched plants
-
-        // Fetch animals for each plant
-        const animalPromises = plantsData.map(async (plant) => {
-            const animalReferences = plant.animalReferences; // Assuming this is the field in your plant document
-            const animalDataPromises = animalReferences.map(async (animalRef) => {
-                const animalDoc = await getDoc(animalRef);
-                return {
-                    id: animalDoc.id,
-                    ...animalDoc.data(),
-                };
-            });
-            return Promise.all(animalDataPromises);
-        });
-
-        const animalsData = await Promise.all(animalPromises);
-        setAnimals(animalsData);
     };
 
     async function getAnimal(ref) {
@@ -80,7 +63,9 @@ const Plants = ({ firebaseApp }) => {
                     <div className="plant-name" key={plant.name}>
                         {plant.name}
                         <div className="plant-animals">
-                            {console.log(animals)}
+                            {plant.animals.map((animal, index) => (
+                                console.log(getAnimal(animal))
+                            ))}
                         </div>
                         <img className="plant-image" src={plantUrls[index]} alt=''  />
                     </div>
