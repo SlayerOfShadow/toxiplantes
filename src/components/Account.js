@@ -6,25 +6,18 @@ import { useContext } from "react";
 import { AuthContext } from "../utils/authContext";
 
 const Account = (props) => {
-    const context = useContext(AuthContext);
-    console.log(context);
+  const { authState, setAuthState } = useContext(AuthContext);
+  console.log(authState);
 
-    const [isLoggedIn, setIsLoggedIn] = useState('false');
+  setAuthState("Nouvelle valeur du contexte");
 
-    // setIsLoggedIn(props.isLoggedIn);
-    console.log("account.js", isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState("false");
 
-    return ( 
-        <>
-        {/* <div className="account">
-            {!isLoggedIn ? (
-                <SignIn />
-            ) : (
-                <SignUp />
-            )}
-        </div> */}
-        </>
-     );
-}
- 
+  return (
+    <>
+      <div className="account">{!isLoggedIn ? <SignIn /> : <SignUp />}</div>
+    </>
+  );
+};
+
 export default Account;
