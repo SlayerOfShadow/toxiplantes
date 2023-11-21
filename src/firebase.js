@@ -36,6 +36,4 @@ async function getUrl(path) {
     }
 }
 
-
-
 export { auth, getUrl };
