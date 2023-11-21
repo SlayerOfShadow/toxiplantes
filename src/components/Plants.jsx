@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs, getDoc } from 'firebase/firestore'; // Import the necessary Firebase Firestore functions
 import { getUrl } from '../firebase';
+import { Link, Route } from 'react-router-dom';
 
 const Plants = ({ firebaseApp }) => {
     const [plants, setPlants] = useState([]);
@@ -87,6 +88,9 @@ const Plants = ({ firebaseApp }) => {
                         <img className="plant-image" src={plantUrls[index]} alt='' />
                     </div>
                 ))}
+                <Link to="/add-plant">
+                    <button>ADD A PLANT</button>
+                </Link>
             </div>
         </div>
     );

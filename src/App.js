@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+import AddPlant from './components/AddPlant';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Plants />} />
             {isLoggedIn && <Route path="/account" element={<Account isLoggedIn={authUser} />} />}
+            <Route path="/add-plant" element={<AddPlant/>} />
           </Routes>
         </Router>
     </div>
