@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -34,6 +35,10 @@ async function getUrl(path) {
         // Handle errors here
         console.error(error);
     }
+}
+
+async function getAllAnimals() {
+
 }
 
 export { auth, getUrl };
