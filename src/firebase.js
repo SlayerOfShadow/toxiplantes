@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, addDoc, collection, doc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +22,9 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 // Get url from ref
 async function getUrl(path) {
     const storage = getStorage();
@@ -37,8 +40,23 @@ async function getUrl(path) {
     }
 }
 
-async function getAllAnimals() {
+async function addPlant(name, animals) {
+    try {
+        // Create an array of document references for each animal ID
+        const animalRefs = animals.map(animalId => doc(db, 'animals', animalId));
 
+        // Add the new plant to the Firestore collection with animal references
+        const plantRef = await addDoc(collection(db, "plants"), {
+            name: name,
+            animals: animalRefs  // Store the array of document references
+        });
+    
+        console.log('Plant added with ID: ', plantRef.id);
+
+      } catch (error) {
+        console.error('Error adding plant: ', error.message);
+      }
 }
 
-export { auth, getUrl };
+
+export { auth, getUrl, addPlant };
