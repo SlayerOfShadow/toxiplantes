@@ -65,18 +65,26 @@ const AddPlant = () => {
     }
 
     addPlant(name, animals);
+
+    window.location.reload();
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form">
+      <h1 className="form-title">Ajouter une plante</h1>
+      <form className="form-content" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
-          <input type="text" id="name" name="name" />
+          <label htmlFor="name">Nom </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Ex : Marguerite"
+          />
         </div>
 
         <div className="form-group">
-          <label htmlFor="image">Upload Image: </label>
+          <label htmlFor="image">Ajouter une image </label>
           <input type="file" id="image" name="image" accept="image/*" />
         </div>
 
@@ -85,7 +93,7 @@ const AddPlant = () => {
             <div key={index} className="form-group">
               <label htmlFor={`dynamicSelect${index + 1}`}>{`Animal ${
                 index + 1
-              }: `}</label>
+              } : `}</label>
               <select
                 id={`dynamicSelect${index + 1}`}
                 name={`dynamicSelect${index + 1}`}
@@ -100,11 +108,11 @@ const AddPlant = () => {
           ))}
         </div>
 
-        <button type="button" onClick={addSelect}>
-          +
+        <button className="add-animal" type="button" onClick={addSelect}>
+          Ajouter un animal
         </button>
 
-        <button type="submit">Add plant</button>
+        <button type="submit">Ajouter la plante</button>
       </form>
     </div>
   );
