@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/authContext";
 import { useContext } from "react";
 import { getAuth, signOut } from "firebase/auth";
+import "../styles/navbar.scss";
 
 const Navbar = () => {
   const { authState } = useContext(AuthContext);
@@ -19,14 +20,17 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/">
-        {" "}
-        <h1> Toxiplantes</h1>
-      </Link>
-      <ul>
+      <ul className="header">
+        <li>
+          {" "}
+          <Link to="/">
+            {" "}
+            <h1>ToxiPlantes</h1>
+          </Link>
+        </li>
         <li>
           {authState ? (
-            <div>
+            <div className="disconnect">
               <p>Bienvenue {authState.email}</p>{" "}
               <button onClick={userSignOut}>Se déconnecter</button>{" "}
             </div>

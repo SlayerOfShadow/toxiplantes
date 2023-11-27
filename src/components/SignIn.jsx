@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../firebase";
 
-const SignIn = ({updateAuthState}) => {
+const SignIn = ({ updateAuthState }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,22 +18,22 @@ const SignIn = ({updateAuthState}) => {
   };
 
   return (
-    <div className="sign-in-container">
-      <form onSubmit={signIn}>
-        <h1>Log In to your Account</h1>
+    <div className="form">
+      <h1 className="form-title">Se connecter</h1>
+      <form className="form-content" onSubmit={signIn}>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="exemple@mail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
           type="password"
-          placeholder="Enter your password"
+          placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="submit">Log In</button>
+        <button type="submit">Valider</button>
       </form>
     </div>
   );

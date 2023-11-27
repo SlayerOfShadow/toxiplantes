@@ -8,6 +8,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/account.scss";
+
 const Account = (props) => {
   const { authState, setAuthState } = useContext(AuthContext);
 
@@ -35,7 +37,9 @@ const Account = (props) => {
   return (
     <>
       <div className="account">
-        <SignIn /> <SignUp />
+        <SignIn />
+        <span className="line" />
+        <SignUp />
       </div>
     </>
   );

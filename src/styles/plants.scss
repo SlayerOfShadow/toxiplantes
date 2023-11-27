@@ -1,0 +1,76 @@
+.plants {
+  padding: 0 1rem;
+  margin-bottom: 3rem;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    &-text {
+      color: var(--green);
+    }
+
+    &-description {
+      font-style: italic;
+    }
+  }
+
+  .all-plants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: var(--content-width);
+    margin: auto;
+
+    .plant {
+      width: 40%;
+
+      &-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      &-image {
+        width: 100%;
+        border-radius: 0.8rem;
+      }
+    }
+  }
+
+  .add-plant {
+    position: fixed;
+    bottom: 2rem;
+    right: 3rem;
+
+    button {
+      padding: 0.8rem 1rem;
+    }
+
+    button svg {
+      fill: white;
+      transition: all ease 0.3s;
+    }
+
+    button:hover {
+      svg {
+        fill: var(--green) !important;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .plants {
+    .all-plants {
+      .plant {
+        width: 23%;
+      }
+    }
+
+    .add-plant {
+    }
+  }
+}

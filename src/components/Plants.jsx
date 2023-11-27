@@ -3,6 +3,7 @@ import { getFirestore, collection, getDocs, getDoc } from "firebase/firestore"; 
 import { getUrl } from "../firebase";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/authContext";
+import "../styles/plants.scss";
 
 const Plants = ({ firebaseApp }) => {
   const [plants, setPlants] = useState([]);
@@ -74,12 +75,20 @@ const Plants = ({ firebaseApp }) => {
 
   return (
     <div className="plants">
-      <h2>My Plants:</h2>
+      <div className="title">
+        <h2 className="title-text">Liste des plantes toxiques</h2>
+        <p className="title-description">
+          Retrouvez ci-dessous une liste de plantes toxiques pour les animaux.
+        </p>
+      </div>
       <div className="all-plants">
         {plants.map((plant, index) => (
-          <div className="plant-name" key={plant.name}>
-            {plant.name}
+          <div className="plant" key={plant.name}>
+            <img className="plant-image" src={plantUrls[index]} alt="" />
+
+            <p className="plant-name">{plant.name}</p>
             <div className="plant-animals">
+              <p>Animaux concernés :</p>
               {animalNames[index] && (
                 <ul>
                   {animalNames[index].map((animal, animalIndex) => (
@@ -88,16 +97,28 @@ const Plants = ({ firebaseApp }) => {
                 </ul>
               )}
             </div>
-            <img className="plant-image" src={plantUrls[index]} alt="" />
           </div>
         ))}
-
-        {authState && (
-          <Link to="/add-plant">
-            <button>ADD A PLANT</button>
-          </Link>
-        )}
       </div>
+      {authState && (
+        <Link className="add-plant" to="/add-plant">
+          <button>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 0C9.44771 0 9 0.447716 9 1V9H1C0.447708 9 0 9.44772 0 10C0 10.5523 0.447708 11 1 11H9V19C9 19.5523 9.44771 20 10 20C10.5523 20 11 19.5523 11 19V11H19C19.5523 11 20 10.5523 20 10C20 9.44772 19.5523 9 19 9H11V1C11 0.447716 10.5523 0 10 0Z"
+              />
+            </svg>
+          </button>
+        </Link>
+      )}
     </div>
   );
 };

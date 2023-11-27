@@ -18,22 +18,21 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-in-container">
-      <form onSubmit={signUp}>
-        <h1>Create Account</h1>
+    <div className="form">
+      <h1 className="form-title">Créer un compte</h1>
+      <form className="form-content" onSubmit={signUp}>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="exemple@mail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
           type="password"
-          placeholder="Enter your password"
-          value={password}
+          placeholder="Mot de passe"
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Valider</button>
       </form>
     </div>
   );
