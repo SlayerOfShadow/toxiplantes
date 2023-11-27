@@ -10,7 +10,7 @@ const Plants = ({ firebaseApp }) => {
   const [plantUrls, setPlantUrls] = useState([]);
   const [animalNames, setAnimalNames] = useState([[]]);
 
-  const { authState, setAuthState } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
 
   const fetchData = async () => {
     const db = getFirestore(firebaseApp); // Get Firestore instance from firebaseApp
