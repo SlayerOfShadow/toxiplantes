@@ -1,9 +1,11 @@
-.add-plant-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+.form {
+  width: 25rem;
+  margin: auto;
 
-.add-animal {
-  width: 3rem;
+  .add-animal {
+    background-color: transparent;
+
+    border: 2px solid var(--green);
+    color: var(--green);
+  }
 }
