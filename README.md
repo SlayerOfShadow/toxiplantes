@@ -1,8 +1,24 @@
-# Getting Started with Create React App
+# ToxiPlantes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+IMAC3 project by [Antoine](https://github.com/SlayerOfShadow) & [Grégoire](https://github.com/greg0s/).
+
+## Install the project
+
+```
+git clone git@github.com:SlayerOfShadow/toxiplantes.git
+cd toxiplantes
+npm i
+```
+
+## Run the project
+
+```
+npm start
+```
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
