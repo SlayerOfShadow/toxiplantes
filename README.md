@@ -2,15 +2,29 @@
 
 IMAC3 project by [Antoine](https://github.com/SlayerOfShadow) & [Grégoire](https://github.com/greg0s/).
 
-## Install the project
+## Get the project
 
 ```
 git clone git@github.com:SlayerOfShadow/toxiplantes.git
 cd toxiplantes
+```
+
+## Run the project using Docker
+
+```
+make docker-build
+make docker-run
+```
+
+## Run the project locally
+
+### Install the dependencies
+
+```
 npm i
 ```
 
-## Run the project
+### Run the project
 
 ```
 npm start
