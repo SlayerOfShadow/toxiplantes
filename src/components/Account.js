@@ -32,6 +32,7 @@ const Account = (props) => {
     return () => {
       listen();
     };
+    // eslint-disable-next-line
   }, [authState]);
 
   return (

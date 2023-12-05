@@ -45,6 +45,7 @@ const Plants = ({ firebaseApp }) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [firebaseApp]);
 
   const getImgUrls = async () => {
@@ -71,6 +72,7 @@ const Plants = ({ firebaseApp }) => {
   useEffect(() => {
     getImgUrls();
     fetchAnimalNames();
+    // eslint-disable-next-line
   }, [plants]);
 
   return (
