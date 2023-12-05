@@ -55,6 +55,9 @@ const AddPlant = () => {
     // Get the plant name from the form data
     const name = formData.get("name");
 
+    // Get the image file from the form data
+    const imageFile = formData.get("image");
+
     // Get the animals
     const animals = [];
 
@@ -64,9 +67,7 @@ const AddPlant = () => {
       animals.push(animalValue);
     }
 
-    addPlant(name, animals);
-
-    window.location.reload();
+    addPlant(name, animals, imageFile);
   };
 
   return (

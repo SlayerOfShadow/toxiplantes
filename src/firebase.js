@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { getFirestore, addDoc, collection, doc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,15 +40,23 @@ async function getUrl(path) {
     }
 }
 
-async function addPlant(name, animals) {
+async function addPlant(name, animals, imageFile) {
     try {
+        const storage = getStorage();
+        const imageRef = ref(storage, `images/${name}`);
+        await uploadBytes(imageRef, imageFile);
+
+        // Get the download URL of the uploaded image
+        const imageUrl = await getDownloadURL(imageRef);
+
         // Create an array of document references for each animal ID
         const animalRefs = animals.map(animalId => doc(db, 'animals', animalId));
 
         // Add the new plant to the Firestore collection with animal references
         const plantRef = await addDoc(collection(db, "plants"), {
             name: name,
-            animals: animalRefs  // Store the array of document references
+            animals: animalRefs,  // Store the array of document references
+            imageUrl: imageUrl
         });
     
         console.log('Plant added with ID: ', plantRef.id);
