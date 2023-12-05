@@ -27,6 +27,8 @@
 
     .plant {
       width: 40%;
+      display: flex;
+      flex-direction: column;
 
       &-name {
         font-size: 1.1rem;
@@ -34,8 +36,21 @@
       }
 
       &-image {
+        position: relative;
         width: 100%;
-        border-radius: 0.8rem;
+        padding-top: 100%;
+        overflow: hidden;
+        margin-bottom: 0.7rem;
+
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          object-fit: cover;
+          border-radius: 0.8rem;
+        }
       }
     }
   }

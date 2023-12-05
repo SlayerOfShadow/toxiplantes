@@ -86,7 +86,10 @@ const Plants = ({ firebaseApp }) => {
       <div className="all-plants">
         {plants.map((plant, index) => (
           <div className="plant" key={plant.name}>
-            <img className="plant-image" src={plantUrls[index]} alt="" />
+            <div className="plant-image">
+              {" "}
+              <img src={plantUrls[index]} alt={plant.name} />
+            </div>
 
             <p className="plant-name">{plant.name}</p>
             <div className="plant-animals">
